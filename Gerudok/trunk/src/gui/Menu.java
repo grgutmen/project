@@ -37,6 +37,7 @@ public class Menu extends JMenuBar{
 		
 		menuFile.addSeparator();
 		
+		menuFile.add(GlavniFrame.getInstance().getActionManager().getCloseDiagramAction());
 		
 		
 		add(menuFile);

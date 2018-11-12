@@ -14,6 +14,8 @@ public class ActionManager {
 	
 	private AboutAction aboutAction;
 	
+	private CloseDiagramAction closeDiagramAction;
+	
 	public ActionManager()	 {
 		initialise();
 		
@@ -28,6 +30,7 @@ public class ActionManager {
 		newWorkspaceAction = new NewWorkspaceAction();
 		newDiagramAction = new NewDiagramAction();
 		aboutAction = new AboutAction();
+		closeDiagramAction = new CloseDiagramAction();
 		
 	}
 	
@@ -84,6 +87,9 @@ public class ActionManager {
 	}
 	public void setSaveWorkspaceAction(SaveWorkspaceAction saveWorkspaceAction) {
 		this.saveWorkspaceAction = saveWorkspaceAction;
+	}
+	public CloseDiagramAction getCloseDiagramAction() {
+		return closeDiagramAction;
 	}
 	
 
