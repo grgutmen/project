@@ -19,10 +19,14 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
 
+import actions.ActionManager;
 import javafx.scene.layout.Border;
+import model.workspace.WorkspaceModel;
 
 
 
@@ -31,13 +35,36 @@ import javafx.scene.layout.Border;
 
 public class GlavniFrame extends JFrame{
 	private static GlavniFrame instance = null;
-	public GlavniFrame () {
+	private ActionManager actionManager;
+	
+	private WorkSpaceTree workSpaceTree;
+	private WorkspaceModel workSpaceModel;
+	
+	private JDesktopPane desktop;
+	
+	private void initialise() {
+actionManager=new ActionManager();
+		
+		
+		initialiseWorkSpaceTree();
+		initialiseFrame();
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			SwingUtilities.updateComponentTreeUI(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void initialiseFrame () {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int screenHeight = screenSize.height;
 		int screenWidth = screenSize.width;
 		
-		setSize(screenHeight / 2, screenWidth / 2);
+		setSize(800, 600);
 		setTitle ("Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -71,7 +98,7 @@ public class GlavniFrame extends JFrame{
 			@Override
 			public void windowClosing(WindowEvent e) {
 				JFrame frame= (JFrame) e.getComponent();
-				int code=JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da želite da zatvorite aplikaciju?","Zatvaranje aplikacije?",JOptionPane.YES_NO_OPTION);
+				int code=JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da Å¾elite da zatvorite aplikaciju?","Zatvaranje aplikacije?",JOptionPane.YES_NO_OPTION);
 				if (code!=JOptionPane.YES_OPTION){
 				
 					frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -95,68 +122,55 @@ public class GlavniFrame extends JFrame{
 			}
 		});
 		
-		gui.Menu menu = new gui.Menu(this);
+		gui.Menu menu = new gui.Menu();
 		setJMenuBar(menu);
 		Toolbar toolbar = new Toolbar();
 		
-		JDesktopPane desktop = new JDesktopPane();
+		desktop = new JDesktopPane();
 		
 		
-		
-		JTextArea textArea = new JTextArea("sample", 10, 10);
-		JTextArea textArea2 = new JTextArea("Bla", 10, 10);
-		JLabel lbl = new JLabel("Ovo je labela");
-		JLabel lbl2 = new JLabel ("Ovo je isto labela");
-		
-		lbl2.setVerticalAlignment(SwingConstants.CENTER);
-		lbl2.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl.setVerticalAlignment(SwingConstants.CENTER);
-		lbl.setHorizontalAlignment(SwingConstants.CENTER);
-		JTextField tf = new JTextField("textfield");
-		
-		JPanel panTop = new JPanel();
-		panTop.setPreferredSize(new Dimension(100, 100));
-		JTextArea area1= new JTextArea();
-		panTop.add(new JScrollPane(area1));
+		JScrollPane scroll=new JScrollPane(workSpaceTree);
+		scroll.setMinimumSize(new Dimension(200,150));
+		JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
+		split.setDividerLocation(150);
+		setLocationRelativeTo(null);
 		
 		
-		JPanel panCentar = new JPanel(new BorderLayout(20, 20));
-		panCentar.setBackground(Color.LIGHT_GRAY);
-		JPanel panTop2 = new JPanel();
-		panTop2.setPreferredSize(new Dimension(100, 30));
-		panTop2.add(tf);
-		panCentar.add(panTop2, BorderLayout.NORTH);
-		
-		JScrollPane scrollPane2 = new JScrollPane(textArea2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		panCentar.add(scrollPane2);
-		JScrollPane scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
-		
-		
-		JPanel panLevi = new JPanel(new BorderLayout(20, 20));
-		panLevi.setPreferredSize(new Dimension(100, 100));
-		panLevi.add(scrollPane, BorderLayout.CENTER);
-		
-		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panLevi, panCentar);
-		
-		sp.setOneTouchExpandable(true);
-		sp.setDividerLocation(400);
-		
+		add(split,BorderLayout.CENTER);
 		add(toolbar, BorderLayout.NORTH);
-		add(sp, BorderLayout.CENTER);
-		add(lbl, BorderLayout.SOUTH);
-		add(desktop, BorderLayout.EAST);
+		
+		
+		
 		
 		
 		
 
 	}
 	
+	
+	
 	public static GlavniFrame getInstance () {
 		if (instance == null) {
 			instance = new GlavniFrame();
+			instance.initialise();
 			
 		}
 		return instance;
+	}
+	
+	private void initialiseWorkSpaceTree() {
+		workSpaceTree = new WorkSpaceTree();
+		workSpaceModel = new WorkspaceModel();
+		workSpaceTree.setModel(workSpaceModel);
+	}
+	
+	public ActionManager getActionManager() {
+		return actionManager;
+	}
+	public WorkspaceModel getWorkSpaceModel() {
+		return workSpaceModel;
+	}
+	public WorkSpaceTree getWorkSpaceTree() {
+		return workSpaceTree;
 	}
 }

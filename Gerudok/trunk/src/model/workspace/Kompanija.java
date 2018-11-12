@@ -5,23 +5,27 @@ import java.util.Enumeration;
 
 import javax.swing.tree.TreeNode;
 
-public class Workspace implements TreeNode{
+public class Kompanija implements TreeNode{
 	
-	private String name;
-	private ArrayList<Project> projects = new ArrayList<Project>();
+	private ArrayList<Workspace> radniProstori = new ArrayList<Workspace>();
 	
-	public Workspace() {
+	public Kompanija() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public ArrayList<Workspace> getRadniProstori() {
+		return radniProstori;
+	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "Workspace";
+		return "Kompanija";
 	}
 	
-	public ArrayList<Project> getProjects() {
-		return projects;
+	@Override
+	public boolean getAllowsChildren() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	@Override
 	public TreeNode getChildAt(int childIndex) {
@@ -29,17 +33,7 @@ public class Workspace implements TreeNode{
 		return null;
 	}
 	@Override
-	public boolean getAllowsChildren() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
 	public int getChildCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public int getIndex(TreeNode node) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -48,8 +42,10 @@ public class Workspace implements TreeNode{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public void setProjects(ArrayList<Project> projects) {
-		this.projects = projects;
+	@Override
+	public int getIndex(TreeNode node) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	@Override
 	public Enumeration children() {
@@ -61,16 +57,11 @@ public class Workspace implements TreeNode{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	public void addProject(Project project) {
-		projects.add(project);
-		project.setName("Project - Grafički editor "+projects.size());
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+	public void addWorkspace(Workspace workspace) {
+		radniProstori.add(workspace);
+		workspace.setName("Workspace");
 	}
 	
 	
+
 }
