@@ -37,7 +37,7 @@ public class AboutAction extends AbstractGEDAction{
 		
 		frame.setSize(30, 30);
 		
-		ImageIcon image  = new ImageIcon("C://users/Nikola/eclipse-workspace/installer/src/IMAG0500.jpg");
+		ImageIcon image  = new ImageIcon("C:\\Users\\npantos17\\eclipse-workspace\\installer\\src\\IMAG0500.jpg");
 		JLabel label = new JLabel(image);
 		Image img = image.getImage();
 		Image nova = img.getScaledInstance(100, 150, Image.SCALE_SMOOTH);

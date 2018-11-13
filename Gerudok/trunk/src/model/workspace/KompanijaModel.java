@@ -4,12 +4,14 @@ import javax.swing.tree.DefaultTreeModel;
 
 public class KompanijaModel extends DefaultTreeModel{
 	
-	public KompanijaModel () {
+	public KompanijaModel() {
 		super(new Kompanija());
+		
 	}
 	
-	public void addWorkspace(Workspace workspace) {
-		((Kompanija)getRoot()).addWorkspace(workspace);
+	public void dodajCvor(Project project) {
+		
+		((Kompanija)getRoot()).addProject(project);
 	}
 
 }

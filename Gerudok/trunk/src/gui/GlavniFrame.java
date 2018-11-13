@@ -25,8 +25,8 @@ import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
 
 import actions.ActionManager;
-import javafx.scene.layout.Border;
-import model.workspace.WorkspaceModel;
+import model.workspace.KompanijaModel;
+
 
 
 
@@ -37,8 +37,8 @@ public class GlavniFrame extends JFrame{
 	private static GlavniFrame instance = null;
 	private ActionManager actionManager;
 	
-	private WorkSpaceTree workSpaceTree;
-	private WorkspaceModel workSpaceModel;
+	private KompanijaTree kompanijaTree;
+	private model.workspace.KompanijaModel KompanijaModel;
 	
 	private JDesktopPane desktop;
 	
@@ -129,7 +129,7 @@ public class GlavniFrame extends JFrame{
 		desktop = new JDesktopPane();
 		
 		
-		JScrollPane scroll=new JScrollPane(workSpaceTree);
+		JScrollPane scroll=new JScrollPane(kompanijaTree);
 		scroll.setMinimumSize(new Dimension(200,150));
 		JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
 		split.setDividerLocation(150);
@@ -159,18 +159,18 @@ public class GlavniFrame extends JFrame{
 	}
 	
 	private void initialiseWorkSpaceTree() {
-		workSpaceTree = new WorkSpaceTree();
-		workSpaceModel = new WorkspaceModel();
-		workSpaceTree.setModel(workSpaceModel);
+		kompanijaTree = new KompanijaTree();
+		KompanijaModel = new KompanijaModel();
+		kompanijaTree.setModel(KompanijaModel);
 	}
 	
 	public ActionManager getActionManager() {
 		return actionManager;
 	}
-	public WorkspaceModel getWorkSpaceModel() {
-		return workSpaceModel;
+	public KompanijaTree getKompanijaTree() {
+		return kompanijaTree;
 	}
-	public WorkSpaceTree getWorkSpaceTree() {
-		return workSpaceTree;
+	public model.workspace.KompanijaModel getKompanijaModel() {
+		return KompanijaModel;
 	}
 }

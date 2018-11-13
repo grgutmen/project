@@ -7,20 +7,20 @@ import javax.swing.tree.TreeNode;
 
 public class Kompanija implements TreeNode{
 	
-	private ArrayList<Workspace> radniProstori = new ArrayList<Workspace>();
+	private ArrayList<Project> projekti = new ArrayList<Project>();
+	private String name;
 	
 	public Kompanija() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ArrayList<Workspace> getRadniProstori() {
-		return radniProstori;
-	}
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return "Kompanija";
 	}
+	
 	
 	@Override
 	public boolean getAllowsChildren() {
@@ -57,9 +57,18 @@ public class Kompanija implements TreeNode{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	public void addWorkspace(Workspace workspace) {
-		radniProstori.add(workspace);
-		workspace.setName("Workspace");
+	public void addProject(Project project) {
+		projekti.add(project);
+		project.setName("Workspace");
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public ArrayList<Project> getProjekti() {
+		return projekti;
 	}
 	
 	
