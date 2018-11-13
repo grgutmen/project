@@ -20,24 +20,23 @@ public class Menu extends JMenuBar{
 		JMenu menuFile = new JMenu ("File");
 		menuFile.setMnemonic(KeyEvent.VK_F);
 		
-		menuFile.add(GlavniFrame.getInstance().getActionManager().getOpenWorkspaceAction());
+		
 		menuFile.add(GlavniFrame.getInstance().getActionManager().getOpenProjectAction());
 		
 		menuFile.addSeparator();
 		
-		menuFile.add(GlavniFrame.getInstance().getActionManager().getNewDiagramAction());
+		
 		menuFile.add(GlavniFrame.getInstance().getActionManager().getNewProjectAction());
-		menuFile.add(GlavniFrame.getInstance().getActionManager().getNewWorkspaceAction());
 		
 		menuFile.addSeparator();
 		
-		menuFile.add(GlavniFrame.getInstance().getActionManager().getSaveDiagramAction());
+	
 		menuFile.add(GlavniFrame.getInstance().getActionManager().getSaveProjectAction());
-		menuFile.add(GlavniFrame.getInstance().getActionManager().getSaveWorkspaceAction());
+		
 		
 		menuFile.addSeparator();
 		
-		menuFile.add(GlavniFrame.getInstance().getActionManager().getCloseDiagramAction());
+
 		
 		
 		add(menuFile);
