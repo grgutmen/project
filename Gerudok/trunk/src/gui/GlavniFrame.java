@@ -43,7 +43,7 @@ public class GlavniFrame extends JFrame{
 	private JDesktopPane desktop;
 	
 	private void initialise() {
-actionManager=new ActionManager();
+		actionManager=new ActionManager();
 		
 		
 		initialiseWorkSpaceTree();
