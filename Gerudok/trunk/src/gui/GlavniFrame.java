@@ -18,14 +18,23 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTree;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
+import javax.swing.tree.DefaultTreeCellEditor;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
 
 import actions.ActionManager;
-import model.workspace.KompanijaModel;
+import controller.TreeController;
+import javafx.scene.control.SplitPane;
+import model.workspace.Project;
+import model.workspace.Workspace;
+import view.CellEditor;
+import view.CellRenderer;
 
 
 
@@ -36,19 +45,17 @@ import model.workspace.KompanijaModel;
 public class GlavniFrame extends JFrame{
 	private static GlavniFrame instance = null;
 	private ActionManager actionManager;
+	private JScrollPane sp = null;
+	private JPanel radniPanel = null;
+	private PanelDoleDesno doleDesno = null;
+	private JTree tree = null;
 	
-	private KompanijaTree kompanijaTree;
-	private model.workspace.KompanijaModel KompanijaModel;
 	
-	private JDesktopPane desktop;
+	
 	
 	private void initialise() {
 		actionManager=new ActionManager();
-		
-		
-		initialiseWorkSpaceTree();
 		initialiseFrame();
-		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			SwingUtilities.updateComponentTreeUI(this);
@@ -126,21 +133,30 @@ public class GlavniFrame extends JFrame{
 		setJMenuBar(menu);
 		Toolbar toolbar = new Toolbar();
 		
-		desktop = new JDesktopPane();
+		
+		PanelDoleDesno doledesno = new PanelDoleDesno(new Project("asd"));
 		
 		
-		JScrollPane scroll=new JScrollPane(kompanijaTree);
-		scroll.setMinimumSize(new Dimension(200,150));
-		JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
-		split.setDividerLocation(150);
-		setLocationRelativeTo(null);
+		JPanel radniPanel = new JPanel();
+		radniPanel.setSize(150, 150);
+		JSplitPane split2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, radniPanel, doledesno);
+		split2.setDividerLocation(350);
 		
+		tree = initialiseTree();
+		JScrollPane sp = new JScrollPane(tree);
+	
 		
-		add(split,BorderLayout.CENTER);
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sp, split2);
+		
+		splitPane.setDividerLocation(150);
+	
+
+		
+		add(splitPane,BorderLayout.CENTER);
 		add(toolbar, BorderLayout.NORTH);
 		
 		
-		
+		setVisible(true);
 		
 		
 		
@@ -148,6 +164,16 @@ public class GlavniFrame extends JFrame{
 	}
 	
 	
+	private JTree initialiseTree() {
+		Workspace root = new Workspace();
+		JTree tree = new JTree(root);
+		tree.setModel(new DefaultTreeModel(root));
+		tree.addTreeSelectionListener(new TreeController());
+		tree.setCellEditor(new CellEditor(tree, new DefaultTreeCellRenderer()));
+		tree.setCellRenderer(new CellRenderer());
+		tree.setEditable(true);
+		return tree;
+	}
 	
 	public static GlavniFrame getInstance () {
 		if (instance == null) {
@@ -158,19 +184,11 @@ public class GlavniFrame extends JFrame{
 		return instance;
 	}
 	
-	private void initialiseWorkSpaceTree() {
-		kompanijaTree = new KompanijaTree();
-		KompanijaModel = new KompanijaModel();
-		kompanijaTree.setModel(KompanijaModel);
-	}
+	
 	
 	public ActionManager getActionManager() {
 		return actionManager;
 	}
-	public KompanijaTree getKompanijaTree() {
-		return kompanijaTree;
-	}
-	public model.workspace.KompanijaModel getKompanijaModel() {
-		return KompanijaModel;
-	}
+	
+	
 }

@@ -11,15 +11,17 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellEditor;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+import model.workspace.Project;
+
 public class CellEditor extends DefaultTreeCellEditor implements ActionListener{
+	private Object stavka = null;
+	private JTextField edit = null;
 	
 	public CellEditor(JTree arg0, DefaultTreeCellRenderer arg1) {
 		super(arg0, arg1);
 		// TODO Auto-generated constructor stub
 	}
 
-	private Object stavka = null;
-	private JTextField edit = null;
 	
 	
 	@Override
@@ -42,10 +44,10 @@ public class CellEditor extends DefaultTreeCellEditor implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (stavka instanceof model.workspace.Project){
-			((model.workspace.Kompanija)stavka).setName(e.getActionCommand());	
-		}else{
-			((model.workspace.Project)stavka).setName(e.getActionCommand());
+		String newName = e.getActionCommand();
+		if(stavka instanceof Project) {
+			Project project = (Project) stavka;
+			project.setName(newName);
 		}
 	}
 

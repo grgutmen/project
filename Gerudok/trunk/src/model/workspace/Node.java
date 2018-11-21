@@ -1,27 +1,28 @@
 package model.workspace;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 
+import javax.swing.JTextArea;
 import javax.swing.tree.TreeNode;
 
-public class Kompanija implements TreeNode{
+public class Node implements TreeNode{
 	
-	private ArrayList<Project> projekti = new ArrayList<Project>();
+	private String parentBroj;
 	private String name;
+	private JTextArea textArea;
 	
-	public Kompanija() {
-		// TODO Auto-generated constructor stub
+	public Node() {
+		parentBroj = "1";
+		name = "Node";
+		textArea = new JTextArea("Sample text");
+		
 	}
-	
 	
 	@Override
-	public String toString() {
+	public Enumeration children() {
 		// TODO Auto-generated method stub
-		return "Kompanija";
+		return null;
 	}
-	
-	
 	@Override
 	public boolean getAllowsChildren() {
 		// TODO Auto-generated method stub
@@ -38,17 +39,12 @@ public class Kompanija implements TreeNode{
 		return 0;
 	}
 	@Override
-	public TreeNode getParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
 	public int getIndex(TreeNode node) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override
-	public Enumeration children() {
+	public TreeNode getParent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -57,20 +53,5 @@ public class Kompanija implements TreeNode{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	public void addProject(Project project) {
-		projekti.add(project);
-		project.setName("Workspace");
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public ArrayList<Project> getProjekti() {
-		return projekti;
-	}
-	
-	
 
 }

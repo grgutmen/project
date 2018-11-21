@@ -29,7 +29,6 @@ public class NewProjectAction extends AbstractGEDAction{
 	public void actionPerformed(ActionEvent e) {
 		NewProjectWindow window = new NewProjectWindow();
 		window.setVisible(true);
-		if (window.getButtonOK())
 		
 		
 		

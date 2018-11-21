@@ -22,7 +22,7 @@ public class Toolbar extends JToolBar{
 			}
 		});
 		btnNew.setActionCommand("New");
-		btnNew.setIcon(new ImageIcon("images/new_16x16.jpg"));
+		btnNew.setIcon(new ImageIcon("src//images/fileopen.png"));
 		
 		btnNew.setToolTipText("New");
 		add(btnNew);

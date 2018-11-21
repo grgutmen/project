@@ -12,7 +12,7 @@ public class OpenProjectAction extends AbstractGEDAction{
 	
 	public OpenProjectAction() {
 		putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O , ActionEvent.CTRL_MASK));
-		putValue(SMALL_ICON, loadIcon("C://users/Nikola/eclipse-workspace/installer/src/fileopen.png"));
+		putValue(SMALL_ICON, loadIcon("src//images/fileopen.png"));
 		putValue(NAME, "Open project");
 		putValue(SHORT_DESCRIPTION, "Open project");
 	}

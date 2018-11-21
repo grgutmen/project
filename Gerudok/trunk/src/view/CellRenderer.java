@@ -9,8 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
-import model.workspace.Kompanija;
+
 import model.workspace.Project;
+import model.workspace.Workspace;
 
 public class CellRenderer extends DefaultTreeCellRenderer{
 	
@@ -20,8 +21,8 @@ public class CellRenderer extends DefaultTreeCellRenderer{
 	@Override
 	public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf,
 			int row, boolean hasFocus) {
-		if (value instanceof Kompanija) {
-			URL imageUrl = getClass().getResource("images/fileopen.png");
+		if (value instanceof Workspace) {
+			URL imageUrl = getClass().getResource("images/tproject.gif");
 			Icon icon = null;
 			if (imageUrl != null) 
 				icon = new ImageIcon(imageUrl);
