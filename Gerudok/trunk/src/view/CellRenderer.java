@@ -21,19 +21,20 @@ public class CellRenderer extends DefaultTreeCellRenderer{
 	@Override
 	public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf,
 			int row, boolean hasFocus) {
+		super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
 		if (value instanceof Workspace) {
-			URL imageUrl = getClass().getResource("images/tproject.gif");
-			Icon icon = null;
-			if (imageUrl != null) 
-				icon = new ImageIcon(imageUrl);
-			setIcon(icon);
+			Icon icon = new ImageIcon("images/treeworkspace.png");
+			if (icon!=null) {
+				setIcon(icon);
+			}
+			
 			
 		}else if (value instanceof Project) {
-			URL imageURL = getClass().getResource("images/tproject.gif");
-            Icon icon = null;
-            if (imageURL != null)                       
-                icon = new ImageIcon(imageURL);
-            setIcon(icon);
+			URL imageURL = getClass().getResource("treeproj.png");
+            Icon icon = new ImageIcon("images/treeproj.png");
+            if (icon!=null) {
+            	setIcon(icon);
+            }
 		}
 		return this;
 		

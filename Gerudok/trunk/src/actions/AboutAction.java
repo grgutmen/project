@@ -22,7 +22,7 @@ public class AboutAction extends AbstractGEDAction{
 	public AboutAction() {
 		putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(
 		        KeyEvent.VK_O, ActionEvent.CTRL_MASK));
-		putValue(SMALL_ICON, loadIcon("images/?.png"));
+		putValue(SMALL_ICON, loadIcon("images/circle.png"));
 		putValue(NAME, "About");
 		putValue(SHORT_DESCRIPTION, "About");
 	}
@@ -37,7 +37,7 @@ public class AboutAction extends AbstractGEDAction{
 		
 		frame.setSize(30, 30);
 		
-		ImageIcon image  = new ImageIcon("src\\images\\IMAG0500.jpg");
+		ImageIcon image  = new ImageIcon("images/IMAG0500.jpg");
 		JLabel label = new JLabel(image);
 		Image img = image.getImage();
 		Image nova = img.getScaledInstance(100, 150, Image.SCALE_SMOOTH);

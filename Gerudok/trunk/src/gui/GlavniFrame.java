@@ -49,6 +49,7 @@ public class GlavniFrame extends JFrame{
 	private JPanel radniPanel = null;
 	private PanelDoleDesno doleDesno = null;
 	private JTree tree = null;
+	private StatusBar statusBar = null;
 	
 	
 	
@@ -144,16 +145,17 @@ public class GlavniFrame extends JFrame{
 		
 		tree = initialiseTree();
 		JScrollPane sp = new JScrollPane(tree);
-	
-		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sp, split2);
-		
 		splitPane.setDividerLocation(150);
+		
+		statusBar = new StatusBar();
+		
 	
 
 		
 		add(splitPane,BorderLayout.CENTER);
 		add(toolbar, BorderLayout.NORTH);
+		add(statusBar, BorderLayout.SOUTH);
 		
 		
 		setVisible(true);
@@ -172,6 +174,7 @@ public class GlavniFrame extends JFrame{
 		tree.setCellEditor(new CellEditor(tree, new DefaultTreeCellRenderer()));
 		tree.setCellRenderer(new CellRenderer());
 		tree.setEditable(true);
+		root.addProject(new Project("Project"));
 		return tree;
 	}
 	

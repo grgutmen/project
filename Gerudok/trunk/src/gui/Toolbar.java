@@ -7,25 +7,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
 
+import actions.ActionManager;
+
 public class Toolbar extends JToolBar{
 	public Toolbar () {
 		super(JToolBar.HORIZONTAL);
 		setFloatable(false);
+		add(GlavniFrame.getInstance().getActionManager().getNewProjectAction());
 		
-		JButton btnNew = new JButton();
-		btnNew.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Klik");
-				
-			}
-		});
-		btnNew.setActionCommand("New");
-		btnNew.setIcon(new ImageIcon("src//images/fileopen.png"));
+		add(GlavniFrame.getInstance().getActionManager().getOpenProjectAction());
 		
-		btnNew.setToolTipText("New");
-		add(btnNew);
+		add(GlavniFrame.getInstance().getActionManager().getSaveProjectAction());
+		
+		
+		
 		
 	}
 
