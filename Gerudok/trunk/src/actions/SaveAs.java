@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JTree;
 import javax.swing.KeyStroke;
 
+
 import gui.GlavniFrame;
 import model.workspace.Kompanija;
 import model.workspace.Project;
@@ -28,36 +29,50 @@ public class SaveAs extends AbstractGEDAction{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser jfc = new JFileChooser();
-		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		File kompanijaFile = null;
+		
+
+		File workspaceFolder = null;
 		JTree tree = GlavniFrame.getInstance().getTree();
 		Object selectedComponent = tree.getLastSelectedPathComponent();
 
 		if (selectedComponent instanceof Kompanija) {
+			
+			jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
 			Kompanija kompanija = (Kompanija) selectedComponent;
 
-		
+			
 			int izbor = jfc.showSaveDialog(GlavniFrame.getInstance());
-			if (izbor == JFileChooser.APPROVE_OPTION)
-				kompanijaFile = jfc.getSelectedFile();
-			else
+			if (izbor != JFileChooser.APPROVE_OPTION) {
 				return;
+			}
+			workspaceFolder = jfc.getSelectedFile();
+			File kompanijaFolder = new File(workspaceFolder.getAbsolutePath() + "\\" + kompanija.getName());
+			kompanijaFolder.mkdir();
+			File kompanijaFile = new File(kompanijaFolder + "\\" + ".PROJECT.ikomp");
 
 			kompanija.setIzmenjen(false);
-			kompanija.setFile(kompanijaFile);
 
 			
-			ObjectOutputStream os;
-			try {
+			for (Project project : kompanija.getProjects()) {
+				ObjectOutputStream os;
+				try {
+					File projectFile = new File(kompanijaFolder + "\\" + project.getName() + ".iproj");
+					project.setFile(projectFile);
+					os = new ObjectOutputStream(new FileOutputStream(projectFile));
+					os.writeObject(project);
 
-				os = new ObjectOutputStream(new FileOutputStream(kompanijaFile));
-				os.writeObject(kompanija);
+					os.close();
 
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
+
+			
+			
+			
+			kompanija.setFile(kompanijaFile);
 		}
 			}
 			
