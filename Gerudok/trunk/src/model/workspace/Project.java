@@ -11,6 +11,8 @@ import javax.swing.JTextArea;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 
+import gui.GlavniFrame;
+
 public class Project extends java.util.Observable implements MutableTreeNode, Observer, Serializable{
 	private Kompanija parent = null;
 	private String name;
@@ -21,6 +23,7 @@ public class Project extends java.util.Observable implements MutableTreeNode, Ob
 	public Project () {
 		super();
 		textArea = new JTextArea("Sample");
+		
 	}
 	
 	

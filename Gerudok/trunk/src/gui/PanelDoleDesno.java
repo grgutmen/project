@@ -20,7 +20,7 @@ public class PanelDoleDesno extends JPanel implements java.util.Observer{
 		setSize(150, 100);
 		
 		text = new JLabel();
-		text.setText("blabla");
+		text.setText("");
 		this.project = project;
 		this.project.addObserver(this);
 		
