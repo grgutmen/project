@@ -4,11 +4,11 @@ public class ActionManager {
 	
 	private OpenProjectAction openProjectAction;
 	
-	
+	private SaveAs saveAs;
 	private SaveProjectAction saveProjectAction;
 
 	private NewProjectAction newProjectAction;
-	
+	private NewKompanijaAction newKompanijaAction;
 	
 	
 	private AboutAction aboutAction;
@@ -24,9 +24,9 @@ public class ActionManager {
 		openProjectAction = new OpenProjectAction();
 		
 		saveProjectAction =  new SaveProjectAction();
-		
+		saveAs = new SaveAs();
 		newProjectAction = new NewProjectAction();
-		
+		newKompanijaAction = new NewKompanijaAction();
 		
 		aboutAction = new AboutAction();
 		
@@ -45,7 +45,9 @@ public class ActionManager {
 		return openProjectAction;
 	}
 	
-	
+	public NewKompanijaAction getNewKompanijaAction() {
+		return newKompanijaAction;
+	}
 	public SaveProjectAction getSaveProjectAction() {
 		return saveProjectAction;
 	}
@@ -65,6 +67,9 @@ public class ActionManager {
 	
 	public void setSaveProjectAction(SaveProjectAction saveProjectAction) {
 		this.saveProjectAction = saveProjectAction;
+	}
+	public SaveAs getSaveAs() {
+		return saveAs;
 	}
 	
 	

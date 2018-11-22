@@ -31,6 +31,7 @@ import javax.swing.tree.DefaultTreeModel;
 import actions.ActionManager;
 import controller.TreeController;
 import javafx.scene.control.SplitPane;
+import model.workspace.Kompanija;
 import model.workspace.Project;
 import model.workspace.Workspace;
 import view.CellEditor;
@@ -50,6 +51,7 @@ public class GlavniFrame extends JFrame{
 	private PanelDoleDesno doleDesno = null;
 	private JTree tree = null;
 	private StatusBar statusBar = null;
+	private JTextArea textArea = null;
 	
 	
 	
@@ -135,11 +137,15 @@ public class GlavniFrame extends JFrame{
 		Toolbar toolbar = new Toolbar();
 		
 		
-		PanelDoleDesno doledesno = new PanelDoleDesno(new Project("asd"));
+		PanelDoleDesno doledesno = new PanelDoleDesno(new Project());
 		
+		JTextArea textArea = new JTextArea();
 		
 		JPanel radniPanel = new JPanel();
-		radniPanel.setSize(150, 150);
+		radniPanel.setLayout(new BorderLayout());
+		JScrollPane sp2 = new JScrollPane(textArea);
+		radniPanel.add(sp2, BorderLayout.CENTER);
+		
 		JSplitPane split2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, radniPanel, doledesno);
 		split2.setDividerLocation(350);
 		
@@ -174,7 +180,9 @@ public class GlavniFrame extends JFrame{
 		tree.setCellEditor(new CellEditor(tree, new DefaultTreeCellRenderer()));
 		tree.setCellRenderer(new CellRenderer());
 		tree.setEditable(true);
-		root.addProject(new Project("Project"));
+		Kompanija kompanija = new Kompanija();
+		root.addKompanija(kompanija);
+		kompanija.addProject(new Project());
 		return tree;
 	}
 	
@@ -192,6 +200,20 @@ public class GlavniFrame extends JFrame{
 	public ActionManager getActionManager() {
 		return actionManager;
 	}
-	
+	public JTree getTree() {
+		return tree;
+	}
+	public JPanel getRadniPanel() {
+		return radniPanel;
+	}
+	public PanelDoleDesno getDoleDesno() {
+		return doleDesno;
+	}
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+	public void setTextArea(JTextArea textArea) {
+		this.textArea = textArea;
+	}
 	
 }

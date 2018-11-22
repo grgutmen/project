@@ -20,6 +20,7 @@ public class OpenProjectAction extends AbstractGEDAction{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser jfc = new JFileChooser();
+		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		jfc.showOpenDialog(GlavniFrame.getInstance());
 		
 	}

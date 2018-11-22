@@ -11,27 +11,27 @@ import javax.swing.tree.TreeNode;
 public class Workspace extends Observable implements MutableTreeNode{
 	
 	private String name = "Workspace";
-	private ArrayList<Project> projects = new ArrayList<Project>();
+	private ArrayList<Kompanija> kompanije = new ArrayList<Kompanija>();
 	
 	public Workspace() {
 		super();
 	}
 	
-	public void openProject(Project project) {
-		project.setParent(this);
-		projects.add(project);
+	public void openKompanija(Kompanija kompanija) {
+		kompanija.setParent(this);
+		kompanije.add(kompanija);
 		
 	}
 	
-	public void addProject(Project project) {
-		project.setParent(this);
-		projects.add(project);
-		if (project.getName()==null) {
-			project.setName("Project " + projects.size());
+	public void addKompanija(Kompanija kompanija) {
+		kompanija.setParent(this);
+		kompanije.add(kompanija);
+		if (kompanija.getName()==null) {
+			kompanija.setName("Kompanija " + kompanije.size());
 		}
 	}
-	public void deleteProject(Project project) {
-		projects.remove(project);
+	public void deleteProject(Kompanija kompanija) {
+		kompanije.remove(kompanija);
 	}
 	@Override
 	public String toString() {
@@ -47,18 +47,18 @@ public class Workspace extends Observable implements MutableTreeNode{
 	@Override
 	public TreeNode getChildAt(int arg0) {
 		// TODO Auto-generated method stub
-		return projects.get(arg0);
+		return kompanije.get(arg0);
 	}
 	
 	@Override
 	public int getChildCount() {
 		// TODO Auto-generated method stub
-		return projects.size();
+		return kompanije.size();
 	}
 	@Override
 	public int getIndex(TreeNode node) {
 		// TODO Auto-generated method stub
-		return projects.indexOf(node);
+		return kompanije.indexOf(node);
 	}
 	@Override
 	public TreeNode getParent() {

@@ -1,23 +1,36 @@
 package model.workspace;
 
+import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Enumeration;
 
+import javax.swing.JTextArea;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 
-public class Project extends java.util.Observable implements MutableTreeNode, Observer{
-	private Workspace parent = null;
+public class Project extends java.util.Observable implements MutableTreeNode, Observer, Serializable{
+	private Kompanija parent = null;
 	private String name;
+	private File file;
 	private boolean izmenjen;
+	private JTextArea textArea;
 	
-	public Project (String name) {
-		this.name = name;
+	public Project () {
+		super();
+		textArea = new JTextArea("Sample");
 	}
 	
 	
+	
+	public void setFile(File file) {
+		this.file = file;
+	}
+	public File getFile() {
+		return file;
+	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -63,7 +76,7 @@ public class Project extends java.util.Observable implements MutableTreeNode, Ob
 	@Override
 	public boolean isLeaf() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	@Override
 	public void insert(MutableTreeNode child, int index) {
@@ -105,4 +118,11 @@ public class Project extends java.util.Observable implements MutableTreeNode, Ob
 		}
 		
 	}
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+	public void setTextArea(JTextArea textArea) {
+		this.textArea = textArea;
+	}
+	
 }

@@ -13,13 +13,16 @@ public class Toolbar extends JToolBar{
 	public Toolbar () {
 		super(JToolBar.HORIZONTAL);
 		setFloatable(false);
+		
+		add(GlavniFrame.getInstance().getActionManager().getNewKompanijaAction());
+		
 		add(GlavniFrame.getInstance().getActionManager().getNewProjectAction());
 		
 		add(GlavniFrame.getInstance().getActionManager().getOpenProjectAction());
 		
 		add(GlavniFrame.getInstance().getActionManager().getSaveProjectAction());
 		
-		
+		add(GlavniFrame.getInstance().getActionManager().getSaveAs());
 		
 		
 	}

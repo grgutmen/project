@@ -9,10 +9,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTree;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+import javax.swing.tree.TreePath;
 
-import gui.NewProjectWindow;
+
+import gui.GlavniFrame;
+import model.workspace.Kompanija;
 import model.workspace.Project;
 
 public class NewProjectAction extends AbstractGEDAction{
@@ -27,8 +33,19 @@ public class NewProjectAction extends AbstractGEDAction{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		NewProjectWindow window = new NewProjectWindow();
-		window.setVisible(true);
+		JTree tree = GlavniFrame.getInstance().getTree();
+		Object selected = tree.getLastSelectedPathComponent();
+		TreePath path = tree.getSelectionPath();
+		if (selected instanceof Kompanija) {
+			tree.expandPath(path);
+			Kompanija kompanija = (Kompanija) selected;
+			Project project = new Project();
+			kompanija.addProject(project);
+			kompanija.insert(project, kompanija.getProjects().size()+1);
+			SwingUtilities.updateComponentTreeUI(tree);
+			GlavniFrame.getInstance().getTextArea();
+			
+		}
 		
 		
 		
