@@ -10,20 +10,17 @@ import javax.swing.JTextField;
 
 import model.workspace.Project;
 
-public class PanelDoleDesno extends JPanel implements java.util.Observer{
+public class PanelDoleDesno extends JPanel {
 	
-	private JLabel text;
+	private JTextArea text = new JTextArea();
 	private Project project;
 	
 	 public PanelDoleDesno(Project project) {
 		
 		setSize(150, 100);
-		
-		text = new JLabel();
+		text.setEditable(false);
+		text.setOpaque(false);
 		text.setText("");
-		this.project = project;
-		this.project.addObserver(this);
-		
 		this.add(text, BorderLayout.CENTER);
 		
 		
@@ -31,8 +28,24 @@ public class PanelDoleDesno extends JPanel implements java.util.Observer{
 		
 		
 	}
-	@Override
-	public void update(Observable o, Object arg) {
+	
+	public void update(Object o) {
+		StringBuilder sb = new StringBuilder();
+		Project node = (Project) o;
+		
+		sb.append("Node: ");
+		sb.append(node.toString());
+		sb.append("\n");
+		
+		sb.append("Parent: ");
+		sb.append(node.getParent());
+		sb.append("\n");
+		
+		sb.append("Children: ");
+		sb.append(node.getChildCount());
+		sb.append("\n");
+		
+		text.setText(sb.toString());
 		
 		
 	}

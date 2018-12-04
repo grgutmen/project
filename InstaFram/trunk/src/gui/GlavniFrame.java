@@ -75,7 +75,7 @@ public class GlavniFrame extends JFrame{
 		int screenWidth = screenSize.width;
 		
 		setSize(800, 600);
-		setTitle ("Menu");
+		setTitle ("InstaFram");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
@@ -162,6 +162,8 @@ public class GlavniFrame extends JFrame{
 		add(splitPane,BorderLayout.CENTER);
 		add(toolbar, BorderLayout.NORTH);
 		add(statusBar, BorderLayout.SOUTH);
+		
+		doledesno.update(this.getTree().getModel().getRoot());
 		
 		
 		setVisible(true);
