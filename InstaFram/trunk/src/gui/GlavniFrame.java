@@ -163,7 +163,7 @@ public class GlavniFrame extends JFrame{
 		add(toolbar, BorderLayout.NORTH);
 		add(statusBar, BorderLayout.SOUTH);
 		
-		doledesno.update(this.getTree().getModel().getRoot());
+		doledesno.update();
 		
 		
 		setVisible(true);
