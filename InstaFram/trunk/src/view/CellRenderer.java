@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
-import model.workspace.Kompanija;
 import model.workspace.Project;
+import model.workspace.Parameter;
 import model.workspace.Workspace;
 
 public class CellRenderer extends DefaultTreeCellRenderer{
@@ -29,12 +29,12 @@ public class CellRenderer extends DefaultTreeCellRenderer{
 			}
 			
 			
-		}else if (value instanceof Project) {
+		}else if (value instanceof Parameter) {
             Icon icon = new ImageIcon("images/treeproj.png");
             if (icon!=null) {
             	setIcon(icon);
             }
-		}else if (value instanceof Kompanija) {
+		}else if (value instanceof Project) {
 			Icon icon = new ImageIcon("images/treeproj.png");
 			if (icon!=null) {
 				setIcon(icon);

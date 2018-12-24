@@ -14,8 +14,8 @@ import javax.swing.KeyStroke;
 
 
 import gui.GlavniFrame;
-import model.workspace.Kompanija;
 import model.workspace.Project;
+import model.workspace.Parameter;
 
 public class SaveAs extends AbstractGEDAction{
 	
@@ -35,11 +35,11 @@ public class SaveAs extends AbstractGEDAction{
 		JTree tree = GlavniFrame.getInstance().getTree();
 		Object selectedComponent = tree.getLastSelectedPathComponent();
 
-		if (selectedComponent instanceof Kompanija) {
+		if (selectedComponent instanceof Project) {
 			
 			jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-			Kompanija kompanija = (Kompanija) selectedComponent;
+			Project project = (Project) selectedComponent;
 
 			
 			int izbor = jfc.showSaveDialog(GlavniFrame.getInstance());
@@ -47,20 +47,20 @@ public class SaveAs extends AbstractGEDAction{
 				return;
 			}
 			workspaceFolder = jfc.getSelectedFile();
-			File kompanijaFolder = new File(workspaceFolder.getAbsolutePath() + "\\" + kompanija.getName());
+			File kompanijaFolder = new File(workspaceFolder.getAbsolutePath() + "\\" + project.getName());
 			kompanijaFolder.mkdir();
-			File kompanijaFile = new File(kompanijaFolder + "\\" + ".PROJECT.ikomp");
+			File kompanijaFile = new File(kompanijaFolder + "\\" + ".PROJECT.iproj");
 
-			kompanija.setIzmenjen(false);
+			project.setIzmenjen(false);
 
 			
-			for (Project project : kompanija.getProjects()) {
+			for (Parameter parameter : project.getProjects()) {
 				ObjectOutputStream os;
 				try {
-					File projectFile = new File(kompanijaFolder + "\\" + project.getName() + ".iproj");
-					project.setFile(projectFile);
+					File projectFile = new File(kompanijaFolder + "\\" + parameter.getName() + ".ipar");
+					parameter.setFile(projectFile);
 					os = new ObjectOutputStream(new FileOutputStream(projectFile));
-					os.writeObject(project);
+					os.writeObject(parameter);
 
 					os.close();
 
@@ -72,7 +72,7 @@ public class SaveAs extends AbstractGEDAction{
 			
 			
 			
-			kompanija.setFile(kompanijaFile);
+			project.setFile(kompanijaFile);
 		}
 			}
 			

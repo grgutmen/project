@@ -6,13 +6,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import gui.GlavniFrame;
-import model.workspace.Project;
+import model.workspace.Parameter;
 
 public class DescriptionListener implements MouseListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() instanceof Project) {
+		if (e.getSource() instanceof Parameter) {
 			GlavniFrame g = GlavniFrame.getInstance();
 			g.getDoleDesno().update();
 		}

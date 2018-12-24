@@ -31,8 +31,8 @@ import javax.swing.tree.DefaultTreeModel;
 import actions.ActionManager;
 import controller.TreeController;
 import javafx.scene.control.SplitPane;
-import model.workspace.Kompanija;
 import model.workspace.Project;
+import model.workspace.Parameter;
 import model.workspace.Workspace;
 import view.CellEditor;
 import view.CellRenderer;
@@ -137,7 +137,7 @@ public class GlavniFrame extends JFrame{
 		Toolbar toolbar = new Toolbar();
 		
 		
-		PanelDoleDesno doledesno = new PanelDoleDesno(new Project());
+		PanelDoleDesno doledesno = new PanelDoleDesno(new Parameter());
 		
 		JTextArea textArea = new JTextArea();
 		
@@ -182,9 +182,9 @@ public class GlavniFrame extends JFrame{
 		tree.setCellEditor(new CellEditor(tree, new DefaultTreeCellRenderer()));
 		tree.setCellRenderer(new CellRenderer());
 		tree.setEditable(true);
-		Kompanija kompanija = new Kompanija();
-		root.addKompanija(kompanija);
-		kompanija.addProject(new Project());
+		Project project = new Project();
+		root.addProject(project);
+		project.addParameter(new Parameter());
 		return tree;
 	}
 	

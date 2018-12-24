@@ -3,83 +3,76 @@ package model.workspace;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Enumeration;
+import java.util.Observable;
 
-import javax.swing.JTextArea;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 
-import gui.GlavniFrame;
-
-public class Project extends java.util.Observable implements MutableTreeNode, Observer, Serializable{
-	private Kompanija parent = null;
-	private String name;
+public class Project extends Observable implements MutableTreeNode, Serializable{
+	private ArrayList<Parameter> parameters = new ArrayList<Parameter>();
+	private Workspace parent = null;
 	private File file;
+	private String name;
 	private boolean izmenjen;
-	private JTextArea textArea;
 	
 	public Project () {
 		super();
-		textArea = new JTextArea("Sample");
-		
-	}
-	
-	
-	
-	public void setFile(File file) {
-		this.file = file;
-	}
-	public File getFile() {
-		return file;
 	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return name;
 	}
+	
+	public void openProject(Parameter parameter) {
+		parameter.setParent(this);
+		parameters.add(parameter);
+		
+	}
+	
+	public void addParameter(Parameter parameter) {
+		parameter.setParent(this);
+		parameters.add(parameter);
+		if (parameter.getName() == null) {
+			parameter.setName("Project - " + parameters.size());
+		}
+	}
+	public File getFile() {
+		return file;
+	}
+	public void setFile(File file) {
+		this.file = file;
+	}
+	
+	public void deleteProject(Parameter parameter) {
+		parameters.remove(parameter);
+	}
+	
 	@Override
 	public boolean getAllowsChildren() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	@Override
 	public TreeNode getChildAt(int childIndex) {
 		// TODO Auto-generated method stub
-		return null;
+		return parameters.get(childIndex);
 	}
 	@Override
 	public int getChildCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return parameters.size();
+	}
+	@Override
+	public int getIndex(TreeNode node) {
+		// TODO Auto-generated method stub
+		return parameters.indexOf(node);
 	}
 	@Override
 	public TreeNode getParent() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	@Override
-	public int getIndex(TreeNode node) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getName() {
-		return name;
-	}
-	@Override
-	public Enumeration children() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public boolean isLeaf() {
-		// TODO Auto-generated method stub
-		return true;
 	}
 	@Override
 	public void insert(MutableTreeNode child, int index) {
@@ -92,7 +85,22 @@ public class Project extends java.util.Observable implements MutableTreeNode, Ob
 		
 	}
 	@Override
+	public void setParent(MutableTreeNode newParent) {
+		this.parent=parent;
+		
+	}
+	@Override
+	public Enumeration children() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
 	public void remove(MutableTreeNode node) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void setUserObject(Object object) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -102,30 +110,25 @@ public class Project extends java.util.Observable implements MutableTreeNode, Ob
 		
 	}
 	@Override
-	public void setParent(MutableTreeNode newParent) {
+	public boolean isLeaf() {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
-	@Override
-	public void setUserObject(Object object) {
-		// TODO Auto-generated method stub
-		
+	public boolean isIzmenjen() {
+		return izmenjen;
 	}
 	public void setIzmenjen(boolean izmenjen) {
 		this.izmenjen = izmenjen;
 	}
-	@Override
-	public void update(Observable o, Object arg) {
-		if (!this.izmenjen) {
-			this.setIzmenjen(true);
-		}
-		
+	public String getName() {
+		return name;
 	}
-	public JTextArea getTextArea() {
-		return textArea;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public void setTextArea(JTextArea textArea) {
-		this.textArea = textArea;
+	public ArrayList<Parameter> getProjects() {
+		return parameters;
 	}
 	
+
 }

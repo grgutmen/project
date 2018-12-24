@@ -2,13 +2,13 @@ package actions;
 
 public class ActionManager {
 	
-	private OpenProjectAction openProjectAction;
+	private OpenWorkspaceAction openWorkspaceAction;
 	
 	private SaveAs saveAs;
 	private SaveProjectAction saveProjectAction;
 
-	private NewProjectAction newProjectAction;
-	private NewKompanijaAction newKompanijaAction;
+	private NewParameterAction newParameterAction;
+	private NewProjectAction newKompanijaAction;
 	
 	
 	private AboutAction aboutAction;
@@ -21,12 +21,12 @@ public class ActionManager {
 	}
 	private void initialise() {
 		
-		openProjectAction = new OpenProjectAction();
+		openWorkspaceAction = new OpenWorkspaceAction();
 		
 		saveProjectAction =  new SaveProjectAction();
 		saveAs = new SaveAs();
-		newProjectAction = new NewProjectAction();
-		newKompanijaAction = new NewKompanijaAction();
+		newParameterAction = new NewParameterAction();
+		newKompanijaAction = new NewProjectAction();
 		
 		aboutAction = new AboutAction();
 		
@@ -38,14 +38,14 @@ public class ActionManager {
 	}
 	
 	
-	public NewProjectAction getNewProjectAction() {
-		return newProjectAction;
+	public NewParameterAction getNewProjectAction() {
+		return newParameterAction;
 	}
-	public OpenProjectAction getOpenProjectAction() {
-		return openProjectAction;
+	public OpenWorkspaceAction getOpenProjectAction() {
+		return openWorkspaceAction;
 	}
 	
-	public NewKompanijaAction getNewKompanijaAction() {
+	public NewProjectAction getNewKompanijaAction() {
 		return newKompanijaAction;
 	}
 	public SaveProjectAction getSaveProjectAction() {
@@ -56,12 +56,12 @@ public class ActionManager {
 		this.aboutAction = aboutAction;
 	}
 	
-	public void setNewProjectAction(NewProjectAction newProjectAction) {
-		this.newProjectAction = newProjectAction;
+	public void setNewProjectAction(NewParameterAction newParameterAction) {
+		this.newParameterAction = newParameterAction;
 	}
 	
-	public void setOpenProjectAction(OpenProjectAction openProjectAction) {
-		this.openProjectAction = openProjectAction;
+	public void setOpenProjectAction(OpenWorkspaceAction openWorkspaceAction) {
+		this.openWorkspaceAction = openWorkspaceAction;
 	}
 	
 	

@@ -11,8 +11,8 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellEditor;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
-import model.workspace.Kompanija;
 import model.workspace.Project;
+import model.workspace.Parameter;
 
 public class CellEditor extends DefaultTreeCellEditor implements ActionListener{
 	private Object stavka = null;
@@ -46,12 +46,12 @@ public class CellEditor extends DefaultTreeCellEditor implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String newName = e.getActionCommand();
-		if(stavka instanceof Project) {
+		if(stavka instanceof Parameter) {
+			Parameter parameter = (Parameter) stavka;
+			parameter.setName(newName);
+		}else if(stavka instanceof Project) {
 			Project project = (Project) stavka;
 			project.setName(newName);
-		}else if(stavka instanceof Kompanija) {
-			Kompanija kompanija = (Kompanija) stavka;
-			kompanija.setName(newName);
 		}
 	}
 
