@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
@@ -32,6 +33,7 @@ import actions.ActionManager;
 import controller.TreeController;
 import javafx.scene.control.SplitPane;
 import model.workspace.Project;
+import model.workspace.WorkSpaceModel;
 import model.workspace.Parameter;
 import model.workspace.Workspace;
 import view.CellEditor;
@@ -49,10 +51,11 @@ public class GlavniFrame extends JFrame{
 	private JScrollPane sp = null;
 	private JPanel radniPanel = null;
 	private PanelDoleDesno doleDesno = null;
-	private JTree tree = null;
+	private Tree tree = null;
 	private StatusBar statusBar = null;
 	private JTextArea textArea = null;
-	
+	private Workspace workspace;
+	private WorkSpaceModel workspaceModel;
 	
 	
 	
@@ -174,18 +177,13 @@ public class GlavniFrame extends JFrame{
 	}
 	
 	
-	private JTree initialiseTree() {
-		Workspace root = new Workspace();
-		JTree tree = new JTree(root);
-		tree.setModel(new DefaultTreeModel(root));
-		tree.addTreeSelectionListener(new TreeController());
-		tree.setCellEditor(new CellEditor(tree, new DefaultTreeCellRenderer()));
-		tree.setCellRenderer(new CellRenderer());
-		tree.setEditable(true);
-		Project project = new Project();
-		root.addProject(project);
-		project.addParameter(new Parameter());
+	private Tree initialiseTree() {
+		tree = new Tree();
+		ToolTipManager.sharedInstance().registerComponent(tree);
+		workspaceModel = new WorkSpaceModel();
+		tree.setModel(workspaceModel);
 		return tree;
+		
 	}
 	
 	public static GlavniFrame getInstance () {
@@ -202,7 +200,7 @@ public class GlavniFrame extends JFrame{
 	public ActionManager getActionManager() {
 		return actionManager;
 	}
-	public JTree getTree() {
+	public Tree getTree() {
 		return tree;
 	}
 	public JPanel getRadniPanel() {

@@ -35,7 +35,7 @@ public class Project extends Observable implements MutableTreeNode, Serializable
 		parameter.setParent(this);
 		parameters.add(parameter);
 		if (parameter.getName() == null) {
-			parameter.setName("Project - " + parameters.size());
+			parameter.setName("Parameter - " + parameters.size());
 		}
 	}
 	public File getFile() {
@@ -126,8 +126,12 @@ public class Project extends Observable implements MutableTreeNode, Serializable
 	public void setName(String name) {
 		this.name = name;
 	}
-	public ArrayList<Parameter> getProjects() {
+	
+	public ArrayList<Parameter> getParameters() {
 		return parameters;
+	}
+	public Parameter getParameter(int index) {
+		return parameters.get(index);
 	}
 	
 

@@ -18,8 +18,8 @@ public class NewProjectAction extends AbstractGEDAction{
 		putValue(ACCELERATOR_KEY,KeyStroke.getKeyStroke(
 		        KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		putValue(SMALL_ICON, loadIcon("images/filenew.png"));
-		putValue(NAME, "New kompanija");
-		putValue(SHORT_DESCRIPTION, "New kompanija");
+		putValue(NAME, "New project");
+		putValue(SHORT_DESCRIPTION, "New project");
 	}
 	
 	@Override

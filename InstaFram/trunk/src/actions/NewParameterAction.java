@@ -27,8 +27,8 @@ public class NewParameterAction extends AbstractGEDAction{
 		putValue(ACCELERATOR_KEY,KeyStroke.getKeyStroke(
 		        KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		putValue(SMALL_ICON, loadIcon("images/filenew.png"));
-		putValue(NAME, "New project");
-		putValue(SHORT_DESCRIPTION, "New project");
+		putValue(NAME, "New parameter");
+		putValue(SHORT_DESCRIPTION, "New parameter");
 	}
 	
 	@Override
@@ -41,9 +41,9 @@ public class NewParameterAction extends AbstractGEDAction{
 			Project project = (Project) selected;
 			Parameter parameter = new Parameter();
 			project.addParameter(parameter);
-			project.insert(parameter, project.getProjects().size()+1);
+			project.insert(parameter, project.getParameters().size()+1);
 			SwingUtilities.updateComponentTreeUI(tree);
-			GlavniFrame.getInstance().getTextArea();
+			
 			
 		}
 		
