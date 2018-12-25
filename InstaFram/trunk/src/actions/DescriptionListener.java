@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.tree.MutableTreeNode;
+
 import gui.GlavniFrame;
 import model.workspace.Parameter;
 
@@ -12,7 +14,7 @@ public class DescriptionListener implements MouseListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() instanceof Parameter) {
+		if (e.getSource() instanceof MutableTreeNode) {
 			GlavniFrame g = GlavniFrame.getInstance();
 			g.getDoleDesno().update();
 		}

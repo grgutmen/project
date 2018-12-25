@@ -4,6 +4,7 @@ import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreePath;
 
@@ -19,6 +20,7 @@ public class Tree extends JTree implements TreeSelectionListener{
 		setCellEditor(new CellEditor(this, new DefaultTreeCellRenderer()));
 		setCellRenderer(new CellRenderer());
 		setEditable(true);
+		
 		
 		
 	}

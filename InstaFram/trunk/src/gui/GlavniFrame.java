@@ -24,14 +24,17 @@ import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellEditor;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
 import actions.ActionManager;
+import actions.DescriptionListener;
 import controller.TreeController;
-import javafx.scene.control.SplitPane;
 import model.workspace.Project;
 import model.workspace.WorkSpaceModel;
 import model.workspace.Parameter;
@@ -141,6 +144,7 @@ public class GlavniFrame extends JFrame{
 		
 		
 		PanelDoleDesno doledesno = new PanelDoleDesno(new Parameter());
+		doledesno.addMouseListener(new DescriptionListener());
 		
 		JTextArea textArea = new JTextArea();
 		
@@ -182,6 +186,20 @@ public class GlavniFrame extends JFrame{
 		ToolTipManager.sharedInstance().registerComponent(tree);
 		workspaceModel = new WorkSpaceModel();
 		tree.setModel(workspaceModel);
+		tree.addTreeSelectionListener(new TreeSelectionListener() {
+			
+			@Override
+			public void valueChanged(TreeSelectionEvent e) {
+				DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+				if (node == null) {
+					return;
+				}
+				Object nodeInfo = node.getUserObject();
+				GlavniFrame g = GlavniFrame.getInstance();
+				g.getDoleDesno().update();
+				
+			}
+		});
 		return tree;
 		
 	}
