@@ -38,34 +38,48 @@ public class SaveAs extends AbstractGEDAction {
 		JFileChooser jfc = new JFileChooser();
 		jfc.setFileFilter(new ParameterFIleFIlter());
 		
-		Project project = GlavniFrame.getInstance().getTree().getCurrentProject();
-		File projectFile = project.getFile();
-		
-		
-		if (project.getFile() == null) {
-			if (jfc.showSaveDialog(GlavniFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
-				projectFile = jfc.getSelectedFile();
-			}else {
+		File workspaceFolder = null;
+		JTree tree = GlavniFrame.getInstance().getTree();
+		Object selectedComponent = tree.getLastSelectedPathComponent();
+
+		if (selectedComponent instanceof Project) {
+			jfc.setDialogTitle("Select folder to save project");
+			jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+			Project project = (Project) selectedComponent;
+
+			
+			int choice = jfc.showSaveDialog(GlavniFrame.getInstance());
+			if (choice != JFileChooser.APPROVE_OPTION) {
 				return;
 			}
-		}
-		
-		ObjectOutputStream os;
-		
-		try {
-			os = new ObjectOutputStream(new FileOutputStream(projectFile));
-			os.writeObject(project);
+			workspaceFolder = jfc.getSelectedFile();
+			File projectFolder = new File(workspaceFolder.getAbsolutePath() + "\\" + project.getName());
+			projectFolder.mkdir();
+			File projectFile = new File(projectFolder + "\\" + ".PROJECT.iproj");
 			project.setFile(projectFile);
 			project.setIzmenjen(false);
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 			
-		
+			for (Parameter p:project.getParameters()) {
+				ObjectOutputStream os;
+				try {
+					File parameterFile = new File(projectFolder + "\\" + p.getName() + ".ipar");
+					p.setFile(parameterFile);
+					os = new ObjectOutputStream(new FileOutputStream(parameterFile));
+					os.writeObject(p);
+					os.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
 
-		
+			
+			}
+
+			
+			
+		}
+	
 	}
 
-}
+

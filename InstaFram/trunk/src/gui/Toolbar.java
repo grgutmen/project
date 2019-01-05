@@ -24,7 +24,9 @@ public class Toolbar extends JToolBar{
 		
 		add(GlavniFrame.getInstance().getActionManager().getSaveAs());
 		
+		add(GlavniFrame.getInstance().getActionManager().getDeleteNode());
 		
+		add(GlavniFrame.getInstance().getActionManager().getCommandRedoAction());
 	}
 
 }

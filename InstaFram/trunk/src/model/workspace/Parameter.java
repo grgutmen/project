@@ -11,6 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 
+import commands.CommandManager;
 import gui.GlavniFrame;
 
 public class Parameter extends java.util.Observable implements MutableTreeNode, Observer, Serializable{
@@ -18,12 +19,11 @@ public class Parameter extends java.util.Observable implements MutableTreeNode, 
 	private String name;
 	private File file;
 	private boolean izmenjen;
-	private JTextArea textArea;
+	transient private CommandManager commandManager;
 	
 	public Parameter () {
 		super();
-		textArea = new JTextArea("Sample");
-		
+		this.commandManager = new CommandManager();
 	}
 	
 	
@@ -121,11 +121,9 @@ public class Parameter extends java.util.Observable implements MutableTreeNode, 
 		}
 		
 	}
-	public JTextArea getTextArea() {
-		return textArea;
+	public CommandManager getCommandManager() {
+		return commandManager;
 	}
-	public void setTextArea(JTextArea textArea) {
-		this.textArea = textArea;
-	}
+	
 	
 }

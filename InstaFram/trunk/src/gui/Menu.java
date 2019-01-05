@@ -25,18 +25,12 @@ public class Menu extends JMenuBar{
 		
 		menuFile.addSeparator();
 		
-		
+		menuFile.add(GlavniFrame.getInstance().getActionManager().getNewKompanijaAction());
 		menuFile.add(GlavniFrame.getInstance().getActionManager().getNewProjectAction());
 		
 		menuFile.addSeparator();
 		
-	
 		menuFile.add(GlavniFrame.getInstance().getActionManager().getSaveProjectAction());
-		
-		
-		menuFile.addSeparator();
-		
-
 		
 		
 		add(menuFile);

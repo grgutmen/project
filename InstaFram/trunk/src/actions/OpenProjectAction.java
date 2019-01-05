@@ -17,6 +17,7 @@ import javax.swing.tree.TreePath;
 
 
 import gui.GlavniFrame;
+import gui.Tree;
 import model.workspace.Project;
 import model.workspace.Parameter;
 import model.workspace.Workspace;
@@ -25,39 +26,34 @@ public class OpenProjectAction extends AbstractGEDAction {
 	public OpenProjectAction() {
 		putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 		putValue(SMALL_ICON, loadIcon("images/fileopen.png"));
-		putValue(NAME, "Open company");
-		putValue(SHORT_DESCRIPTION, "Open company");
+		putValue(NAME, "Open project");
+		putValue(SHORT_DESCRIPTION, "Open project");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser jfc = new JFileChooser();
 		jfc.setFileFilter(new ParameterFIleFIlter());
+		Tree tree = GlavniFrame.getInstance().getTree();
 		
-		if(jfc.showOpenDialog(GlavniFrame.getInstance())==JFileChooser.APPROVE_OPTION){
+		if (jfc.showOpenDialog(GlavniFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
 			try {
 				ObjectInputStream os = new ObjectInputStream(new FileInputStream(jfc.getSelectedFile()));
 				  
 				Project p=null;
 				try {
 					p = (Project) os.readObject();
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} catch (Exception e2) {
+					// TODO: handle exception
 				}
-			    
-			    
-			      GlavniFrame.getInstance().getTree().addProject(p);
+				GlavniFrame.getInstance().getTree().addProject(p);
+				SwingUtilities.updateComponentTreeUI(tree);
 				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} 
-			
-		
-		
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+			}
+		}
 	}
 
-}
-}
+

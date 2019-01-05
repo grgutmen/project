@@ -10,14 +10,15 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import model.workspace.Parameter;
+import model.workspace.Project;
 import observer.IObserver;
 
 public class PanelDoleDesno extends JScrollPane implements IObserver{
 	
 	private JTextArea text = new JTextArea();
-	private Parameter parameter;
+	private Project project;
 	
-	 public PanelDoleDesno(Parameter parameter) {
+	 public PanelDoleDesno() {
 		
 		setSize(150, 100);
 		text.setEditable(false);
@@ -34,21 +35,18 @@ public class PanelDoleDesno extends JScrollPane implements IObserver{
 	
 	@Override
 	public void update() {
-		StringBuilder sb = new StringBuilder();
-		if (parameter == null) {
-			return;
-		}
-		
+		Project p = (Project) GlavniFrame.getInstance().getTree().getCurrentProject();
+		StringBuilder sb = new StringBuilder();	
 		sb.append("Node: ");
-		sb.append(parameter.toString());
+		sb.append(project.toString());
 		sb.append("\n");
 		
 		sb.append("Parent: ");
-		sb.append(parameter.getParent());
+		sb.append(project.getParent());
 		sb.append("\n");
 		
 		sb.append("Children: ");
-		sb.append(parameter.getChildCount());
+		sb.append(project.getChildCount());
 		
 		text.setText(sb.toString());
 	}

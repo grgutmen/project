@@ -6,10 +6,10 @@ public class ActionManager {
 	
 	private SaveAs saveAs;
 	private SaveProjectAction saveProjectAction;
-
+	private CommandRedoAction commandRedoAction;
 	private NewParameterAction newParameterAction;
-	private NewProjectAction newKompanijaAction;
-	
+	private NewProjectAction newProjectAction;
+	private DeleteNode deleteNode;
 	
 	private AboutAction aboutAction;
 	
@@ -22,14 +22,13 @@ public class ActionManager {
 	private void initialise() {
 		
 		openWorkspaceAction = new OpenWorkspaceAction();
-		
+		commandRedoAction = new CommandRedoAction();
 		saveProjectAction =  new SaveProjectAction();
 		saveAs = new SaveAs();
 		newParameterAction = new NewParameterAction();
-		newKompanijaAction = new NewProjectAction();
-		
+		newProjectAction = new NewProjectAction();
 		aboutAction = new AboutAction();
-		
+		deleteNode = new DeleteNode();
 		
 	}
 	
@@ -46,7 +45,7 @@ public class ActionManager {
 	}
 	
 	public NewProjectAction getNewKompanijaAction() {
-		return newKompanijaAction;
+		return newProjectAction;
 	}
 	public SaveProjectAction getSaveProjectAction() {
 		return saveProjectAction;
@@ -71,8 +70,18 @@ public class ActionManager {
 	public SaveAs getSaveAs() {
 		return saveAs;
 	}
-	
-	
+	public CommandRedoAction getCommandRedoAction() {
+		return commandRedoAction;
+	}
+	public NewParameterAction getNewParameterAction() {
+		return newParameterAction;
+	}
+	public OpenWorkspaceAction getOpenWorkspaceAction() {
+		return openWorkspaceAction;
+	}
+	public DeleteNode getDeleteNode() {
+		return deleteNode;
+	}
 	
 
 }

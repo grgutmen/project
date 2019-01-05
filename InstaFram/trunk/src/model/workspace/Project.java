@@ -9,15 +9,19 @@ import java.util.Observable;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 
+import commands.CommandManager;
+
 public class Project extends Observable implements MutableTreeNode, Serializable{
 	private ArrayList<Parameter> parameters = new ArrayList<Parameter>();
 	private Workspace parent = null;
+	private CommandManager commandManager;
 	private File file;
 	private String name;
 	private boolean izmenjen;
 	
 	public Project () {
 		super();
+		this.commandManager = new CommandManager();
 	}
 	@Override
 	public String toString() {
@@ -132,6 +136,12 @@ public class Project extends Observable implements MutableTreeNode, Serializable
 	}
 	public Parameter getParameter(int index) {
 		return parameters.get(index);
+	}
+	public CommandManager getCommandManager() {
+		if (commandManager == null) {
+			commandManager = new CommandManager();
+		}
+		return commandManager;
 	}
 	
 
