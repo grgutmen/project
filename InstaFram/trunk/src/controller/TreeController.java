@@ -27,10 +27,8 @@ public class TreeController  implements TreeSelectionListener, IObservable{
 	public void valueChanged(TreeSelectionEvent arg0) {
 		TreePath path = arg0.getPath();
 		Object selected = path.getLastPathComponent();
-		if (selected instanceof Project) {
-			GlavniFrame.getInstance().getDoleDesno().update(selected);
-			notifyAll();
-		}
+		Project p = GlavniFrame.getInstance().getTree().getCurrentProject();
+		GlavniFrame.getInstance().getDoleDesno().update(p);
 		
 		
 	}

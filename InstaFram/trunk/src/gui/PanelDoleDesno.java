@@ -34,8 +34,8 @@ public class PanelDoleDesno extends JScrollPane implements IObserver{
 	}
 	
 	@Override
-	public void update (Object o) {
-		Project project = (Project) o;
+	public void update (Project	project) {
+		
 		StringBuilder sb = new StringBuilder();	
 		sb.append("Node: ");
 		sb.append(project.toString());

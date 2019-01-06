@@ -32,6 +32,14 @@ public class Menu extends JMenuBar{
 		
 		menuFile.add(GlavniFrame.getInstance().getActionManager().getSaveProjectAction());
 		
+		menuFile.addSeparator();
+		
+		menuFile.add(GlavniFrame.getInstance().getActionManager().getCutAction());
+		
+		menuFile.add(GlavniFrame.getInstance().getActionManager().getCopyAction());
+		
+		menuFile.add(GlavniFrame.getInstance().getActionManager().getPasteAction());
+		
 		
 		add(menuFile);
 		

@@ -29,12 +29,12 @@ public class CellRenderer extends DefaultTreeCellRenderer{
 			}
 			
 			
-		}else if (value instanceof Parameter) {
+		}else if (value instanceof Project) {
             Icon icon = new ImageIcon("images/treeproj.png");
             if (icon!=null) {
             	setIcon(icon);
             }
-		}else if (value instanceof Project) {
+		}else if (value instanceof Parameter) {
 			Icon icon = new ImageIcon("images/treeproj.png");
 			if (icon!=null) {
 				setIcon(icon);

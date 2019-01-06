@@ -160,6 +160,12 @@ public class Parameter extends java.util.Observable implements MutableTreeNode, 
 		// TODO Auto-generated method stub
 		
 	}
+	public ParameterView getParameterView() {
+		return parameterView;
+	}
+	public void setParameterView(ParameterView parameterView) {
+		this.parameterView = parameterView;
+	}
 	
 	
 }

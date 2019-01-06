@@ -11,6 +11,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellEditor;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+import gui.GlavniFrame;
 import model.workspace.Project;
 import model.workspace.Parameter;
 
@@ -40,6 +41,16 @@ public class CellEditor extends DefaultTreeCellEditor implements ActionListener{
 			if (((MouseEvent)event).getClickCount()==3){
 				return true;
 			}else if(((MouseEvent)event).getClickCount()==2 ) {
+				if (GlavniFrame.getInstance().getTree().getLastSelectedPathComponent() instanceof Parameter) {
+					Parameter p = (Parameter) GlavniFrame.getInstance().getTree().getLastSelectedPathComponent();
+					if (p.getParameterView() == null) {
+						p.getParameterView().setVisible(true);
+					}else {
+						ParameterView view = new ParameterView();
+						p.setParameterView(view);
+						p.getParameterView().setVisible(true);
+					}
+				}
 				ParameterView view = new ParameterView();
 				view.setVisible(true);
 			}
