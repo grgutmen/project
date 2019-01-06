@@ -1,5 +1,6 @@
 package model.workspace;
 
+import java.awt.datatransfer.Transferable;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 
 import commands.CommandManager;
+import gui.GlavniFrame;
 
 public class Project extends Observable implements MutableTreeNode, Serializable{
 	private ArrayList<Parameter> parameters = new ArrayList<Parameter>();
@@ -143,6 +145,21 @@ public class Project extends Observable implements MutableTreeNode, Serializable
 		}
 		return commandManager;
 	}
-	
+	public void paste() {
+		Transferable content = GlavniFrame.getInstance().getClipboard().getContents(GlavniFrame.getInstance());
+		if ((content != null) && content.isDataFlavorSupported(Parameter.parameterFlavor)) {
+			try {
+				Project project = null;
+				ArrayList<Parameter> parameters = (ArrayList<Parameter>) content.getTransferData(Parameter.parameterFlavor);
+				for(int i=0;i<parameters.size();i++) {
+					project = (Project) GlavniFrame.getInstance().getTree().getLastSelectedPathComponent();
+					project.addParameter(parameters.get(i));
+					parameters.get(i).setParent(project);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 }

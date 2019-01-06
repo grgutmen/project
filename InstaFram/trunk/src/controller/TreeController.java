@@ -12,23 +12,41 @@ import com.sun.javafx.collections.ImmutableObservableList;
 
 import gui.GlavniFrame;
 import gui.Tree;
+import model.workspace.Project;
+import observer.IObservable;
+import observer.IObserver;
 
 
-public class TreeController extends Observable implements TreeSelectionListener{
+public class TreeController  implements TreeSelectionListener, IObservable{
 	
 	public TreeController() {
-		
+		GlavniFrame g = GlavniFrame.getInstance();
+		this.addObserver(g.getDoleDesno());
 	}
 	@Override
 	public void valueChanged(TreeSelectionEvent arg0) {
-		Tree tree = GlavniFrame.getInstance().getTree();
-		DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-		if (node == null) {
-			return;
+		TreePath path = arg0.getPath();
+		Object selected = path.getLastPathComponent();
+		if (selected instanceof Project) {
+			GlavniFrame.getInstance().getDoleDesno().update(selected);
+			notifyAll();
 		}
-		Object nodeInfo = node.getUserObject();
-		GlavniFrame g = GlavniFrame.getInstance();
-		g.getDoleDesno().update();
+		
+		
+	}
+	
+	@Override
+	public void addObserver(IObserver o) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void notifyObservers() {
+		this.notifyAll();
+	}
+	@Override
+	public void removeObserver(IObserver o) {
+		// TODO Auto-generated method stub
 		
 	}
 		

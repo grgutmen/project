@@ -6,6 +6,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Menu;
 import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -47,7 +50,7 @@ import view.CellRenderer;
 
 
 
-public class GlavniFrame extends JFrame{
+public class GlavniFrame extends JFrame implements ClipboardOwner{
 	private static GlavniFrame instance = null;
 	private ActionManager actionManager;
 	private JScrollPane sp = null;
@@ -59,6 +62,7 @@ public class GlavniFrame extends JFrame{
 	private Workspace workspace;
 	private WorkSpaceModel workspaceModel;
 	private TreeController treeCont;
+	private Clipboard clipboard = new Clipboard("InstaFram clipboard");
 	
 	
 	private void initialise() {
@@ -196,7 +200,14 @@ public class GlavniFrame extends JFrame{
 		return instance;
 	}
 	
-	
+	@Override
+	public void lostOwnership(Clipboard clipboard, Transferable contents) {
+		// TODO Auto-generated method stub
+		System.out.println("lostOwnership");
+	}
+	public Clipboard getClipboard() {
+		return clipboard;
+	}
 	
 	public ActionManager getActionManager() {
 		return actionManager;

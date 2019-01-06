@@ -34,8 +34,8 @@ public class PanelDoleDesno extends JScrollPane implements IObserver{
 	}
 	
 	@Override
-	public void update() {
-		Project p = (Project) GlavniFrame.getInstance().getTree().getCurrentProject();
+	public void update (Object o) {
+		Project project = (Project) o;
 		StringBuilder sb = new StringBuilder();	
 		sb.append("Node: ");
 		sb.append(project.toString());
@@ -49,6 +49,7 @@ public class PanelDoleDesno extends JScrollPane implements IObserver{
 		sb.append(project.getChildCount());
 		
 		text.setText(sb.toString());
+		text.setVisible(true);
 	}
 	
 	

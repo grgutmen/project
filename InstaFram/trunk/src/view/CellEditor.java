@@ -39,7 +39,7 @@ public class CellEditor extends DefaultTreeCellEditor implements ActionListener{
 		if (event instanceof MouseEvent)
 			if (((MouseEvent)event).getClickCount()==3){
 				return true;
-			}else if(((MouseEvent)event).getClickCount()==2) {
+			}else if(((MouseEvent)event).getClickCount()==2 ) {
 				ParameterView view = new ParameterView();
 				view.setVisible(true);
 			}
